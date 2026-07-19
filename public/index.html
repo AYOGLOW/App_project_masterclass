@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Center Booking Portal</title>
+    <meta name="description" content="Find availability and request a booking for our event center.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container" style="position: relative;">
+            <a href="/admin-dashboard-xyz789" class="btn btn-secondary" style="position: absolute; top: 0px; right: 20px; text-decoration: none; font-size: 0.9rem; padding: 8px 16px;">Admin Dashboard</a>
+            <h1>Event Center Booking Portal</h1>
+            <p>Find availability and request a booking for your next event.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="status-checker">
+            <h2>Check Booking Status</h2>
+            <div class="search-bar">
+                <input type="text" id="status-search-input" placeholder="Enter your full name (e.g. John Doe)">
+                <button id="status-search-btn" class="btn btn-secondary">Check Status</button>
+            </div>
+            <div id="status-results" class="status-results hidden"></div>
+        </section>
+
+        <section class="booking-section">
+            <h2>Available Dates & Slots</h2>
+            <div class="controls">
+                <button id="prev-week" class="btn btn-outline">&larr; Previous</button>
+                <h3 id="current-week-label">This Week</h3>
+                <button id="next-week" class="btn btn-outline">Next &rarr;</button>
+            </div>
+            <div id="calendar-grid" class="calendar-grid">
+                <!-- Dynamically populated cards -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <h2 id="modal-title">Book Slot</h2>
+            <p id="modal-subtitle">Fill in your details below.</p>
+            <form id="booking-form">
+                <input type="hidden" id="form-date">
+                <input type="hidden" id="form-slot">
+                
+                <div class="form-group">
+                    <label for="planner-name">Full Name</label>
+                    <input type="text" id="planner-name" required placeholder="John Doe">
+                </div>
+                
+                <div class="form-group">
+                    <label for="event-type">Event Type</label>
+                    <select id="event-type" required>
+                        <option value="">Select event type...</option>
+                        <option value="Wedding">Wedding</option>
+                        <option value="Corporate">Corporate Event</option>
+                        <option value="Birthday">Birthday Party</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline" id="cancel-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="submit-btn">Request Booking</button>
+                </div>
+                <div id="form-message" style="margin-top: 15px; color: var(--navy); font-weight: 500;"></div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

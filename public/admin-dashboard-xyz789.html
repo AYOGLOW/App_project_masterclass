@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Event Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>Admin Dashboard</h1>
+            <p>Manage incoming booking requests.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="booking-section">
+            <h2>All Bookings</h2>
+            <div id="admin-message" style="margin-bottom: 15px; color: var(--navy); font-weight: 500; min-height: 24px;"></div>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>Planner Name</th>
+                        <th>Event Type</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="bookings-table-body">
+                    <!-- Populated dynamically -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="/js/admin.js"></script>
+</body>
+</html>
