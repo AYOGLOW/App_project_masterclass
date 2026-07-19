@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Get all slots/bookings
 app.get('/api/slots', async (req, res) => {
@@ -106,12 +106,12 @@ app.get('/api/status', async (req, res) => {
 
 // Secret Admin Dashboard route
 app.get('/admin-dashboard-xyz789', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'admin-dashboard-xyz789.html'));
+    res.sendFile(path.join(__dirname, '../public', 'admin-dashboard-xyz789.html'));
 });
 
 // Catch-all route to serve index.html
 app.use((req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, '../public', 'index.html'));
 });
 
 if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
