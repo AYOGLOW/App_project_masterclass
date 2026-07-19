@@ -1,21 +1,28 @@
-const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
+const { Pool } = require('pg');
 
-const dbPath = process.env.VERCEL ? '/tmp/database.sqlite' : path.resolve(__dirname, 'database.sqlite');
-const db = new sqlite3.Database(dbPath, (err) => {
+// Use Vercel's POSTGRES_URL. We use ssl for secure cloud connections.
+const pool = new Pool({
+    connectionString: process.env.POSTGRES_URL,
+    ssl: process.env.POSTGRES_URL ? { rejectUnauthorized: false } : false
+});
+
+// Initialize table on startup if it doesn't exist
+pool.query(`
+    CREATE TABLE IF NOT EXISTS bookings (
+        id SERIAL PRIMARY KEY,
+        planner_name VARCHAR(255) NOT NULL,
+        event_type VARCHAR(255) NOT NULL,
+        date VARCHAR(50) NOT NULL,
+        time_slot VARCHAR(100) NOT NULL,
+        status VARCHAR(50) DEFAULT 'Pending',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+`, (err, res) => {
     if (err) {
-        console.error('Error opening database', err.message);
+        console.error('Error creating database table:', err.message);
     } else {
-        db.run(`CREATE TABLE IF NOT EXISTS bookings (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            planner_name TEXT NOT NULL,
-            event_type TEXT NOT NULL,
-            date TEXT NOT NULL,
-            time_slot TEXT NOT NULL,
-            status TEXT DEFAULT 'Pending',
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-        )`);
+        console.log('Postgres database initialized successfully.');
     }
 });
 
-module.exports = db;
+module.exports = pool;
